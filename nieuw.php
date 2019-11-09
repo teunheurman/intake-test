@@ -32,8 +32,8 @@ $type = $_GET['type'];
             <?php break;
         case 'task':
         require(__DIR__.'/services/Database.php');
-        $db = new Database;
-
+        $db = new Database;  
+        //Hier wordt niks gedaan met een parameter, daarom wordt de getAllRows gebruikt in plaats van de getAllRowsSafe
         $cars = $db->getAllRows('SELECT car.*, customer.first_name, customer.last_name from car JOIN customer on customer.id = car.customer_id;')
 
         ?>

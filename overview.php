@@ -13,14 +13,19 @@ require(__DIR__.'/classes/Car.php');
 $db = new Database;
 
 
-//TODO: Make sure what they returned is sorted by name
+// TODO: Make sure what they returned is sorted by name
+// Dit is opgelost door een ORDER BY toe te voegen aan de query
+// Hier wordt niks gedaan met een parameter, daarom wordt de getAllRows gebruikt in plaats van de getAllRowsSafe
 $customers = $db->getAllRows('SELECT customer.*, COUNT(car.id) as number_of_cars 
                                     FROM customer
                                     JOIN car on car.customer_id = customer.id
-                                    GROUP BY customer.id');
+                                    GROUP BY customer.id
+                                    ORDER BY customer.first_name, customer.last_name ASC');
 
+//Hier wordt niks gedaan met een parameter, daarom wordt de getAllRows gebruikt in plaats van de getAllRowsSafe
 $cars = $db->getAllRows('SELECT car.id FROM car');
 
+//Hier wordt niks gedaan met een parameter, daarom wordt de getAllRows gebruikt in plaats van de getAllRowsSafe
 $jobs = $db->getAllRows('SELECT task.*, customer.*, car.*
                                 FROM task
                                 JOIN car on task.car_id = car.id

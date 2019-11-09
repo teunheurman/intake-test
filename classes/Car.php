@@ -130,7 +130,10 @@ class Car
      */
     public function loadCar($id): void
     {
-        $car = $this->db->getAllRows(sprintf('SELECT * FROM car WHERE id = %d', $id));
+        $query = 'SELECT * FROM car WHERE id = :id';
+        $parameters = array();
+        $parameters['id'] = $id;
+        $car = $this->db->getAllRowsSafe($query, $parameters);
 
         if (count($car) == 1) {
             $this->setId($car[0]['id']);
@@ -149,7 +152,11 @@ class Car
      */
     public function getCustomerOfCar()
     {
-        $customer = $this->db->getAllRows(sprintf('SELECT * FROM customer WHERE id = %d', $this->getCustomerId()));
+
+        $query = 'SELECT * FROM customer WHERE id = :id';
+        $parameters = array();
+        $parameters['id'] = $this->getCustomerId();
+        $customer = $this->db->getAllRowsSafe($query, $parameters);
         if (count($customer) > 0) {
             return $customer[0];
         }
@@ -162,7 +169,11 @@ class Car
      */
     public function getNumberOfTasksOfCar() : int
     {
-        return count($this->db->getAllRows(sprintf('SELECT * FROM task WHERE car_id = %d', $this->getId())));
+        $query = "SELECT COUNT(*) as 'nr_of_tasks' FROM task WHERE car_id = :car_id";
+        $parameters = array();
+        $parameters['car_id'] = $this->getId();
+        $countedTasks = $this->db->getAllRowsSafe($query, $parameters);
+        return (int)($countedTasks[0]['nr_of_tasks']);
     }
 
 }

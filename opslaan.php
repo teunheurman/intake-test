@@ -8,19 +8,37 @@ $type = $_POST['save_type'];
 
 switch ($type) {
     case 'klant':
-        $db->execQuery("INSERT INTO `customer`(`first_name`, `last_name`, `age`) VALUES ('" . $_POST['first_name'] . "', '" . $_POST['last_name'] . "', " . $_POST['leeftijd'] . ")");
 
+
+        $query = "INSERT INTO `customer`(`first_name`, `last_name`, `age`) VALUES (:first_name, :last_name, :age)";
+        $parameters = array();
+        $parameters['first_name'] = $_POST['first_name'];
+        $parameters['last_name'] = $_POST['last_name'];
+        $parameters['age'] = $_POST['leeftijd'];
+        $db->execQuerySafe($query, $parameters);
+       
+        //Hier wordt niks gedaan met een parameter, daarom wordt de getAllRows gebruikt in plaats van de getAllRowsSafe
         $maxId = (int)$db->getAllRows('SELECT max(ID) as id From customer')[0]['id'];
 
-        $db->execQuery("INSERT INTO `car`(`customer_id`, `brand`, `type`)  VALUES (" . $maxId . ", '" . $_POST['brand'] . "', '" . $_POST['type'] . "')");
-
+        $query = "INSERT INTO `car`(`customer_id`, `brand`, `type`)  VALUES (:customer_id, :brand, :type)";
+        $parameters = array();
+        $parameters['customer_id'] = $maxId;
+        $parameters['brand'] = $_POST['brand'];
+        $parameters['type'] = $_POST['type'];
+        $db->execQuerySafe($query, $parameters);
+    
         break;
 
     case 'task':
 
         try {
-            $db->execQuery(" INSERT INTO `task`(`car_id`, `task`, `status`) VALUES (" . (int)$_POST['car'] . ", '" . $_POST['task'] . "', 0)");
-
+            $query = "INSERT INTO `task`(`car_id`, `task`, `status`) VALUES (:car_id, :task, :status)";
+            $parameters = array();
+            //Ik hoef hier niet car id om te zetten naar een int, hier houdt die zelf rekening mee.
+            $parameters['car_id'] = $_POST['car'];;
+            $parameters['task'] = $_POST['task'];
+            $parameters['status'] = 0;
+            echo $db->execQuerySafe($query, $parameters);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

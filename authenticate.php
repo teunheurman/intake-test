@@ -14,11 +14,11 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 //TODO: Gebruik SHA256 instead of md5 for securing the password
     $password = md5($_POST['password']);
 
-
-    $users = $db->getAllRows(sprintf('SELECT *
-                                FROM user
-                                WHERE login = \'%s\'
-                                AND password = \'%s\';', $login, $password));
+    $query = 'SELECT * FROM user WHERE login = :login AND password = :password;';
+    $parameters = array();
+    $parameters['login'] = $login;
+    $parameters['password'] = $password;
+    $users = $db->getAllRowsSafe($query, $parameters);
 
     if (count($users) > 0) {
         $_SESSION['logged_in'] = true;
