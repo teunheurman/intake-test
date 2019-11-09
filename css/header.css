@@ -1,0 +1,21 @@
+/* 
+    Ik heb er voor gekozen om de login.php, header.php en de footer.php zijn eigen css files tegeven.
+    Dit heb ik gedaan zodat het ten eerste meer overzichtelijke wordt en ten tweede kun je zo sneller
+    iets terug vinden
+*/
+
+nav {
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.nav-tabs{
+    margin-left: 10%;
+    border: none;
+}
+
+.nav-link{
+    color: #343a40;
+    font-size: large;
+    font-weight: 600;
+}

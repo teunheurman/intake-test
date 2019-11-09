@@ -1,0 +1,29 @@
+/* 
+    Ik heb er voor gekozen om de login.php, header.php en de footer.php zijn eigen css files tegeven.
+    Dit heb ik gedaan zodat het ten eerste meer overzichtelijke wordt en ten tweede kun je zo sneller
+    iets terug vinden
+*/
+
+.vertical-center {
+    min-height: 80%; /* Fallback for browsers do NOT support vh unit */
+    min-height: 80vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+
+/* SOURCE: https://codepen.io/colorlib/pen/rxddKy */
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+width: 360px;
+padding: 8% 0 0;
+margin: auto;
+}
+
+
