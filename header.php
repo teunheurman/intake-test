@@ -1,5 +1,5 @@
 <?php
-    //voor ieder pagina die de header gebruikt moet men ook zijn ingelogd.
+    //voor ieder pagina die de header gebruikt moet men ook zijn ingelogd. 
     session_start();
     if (!$_SESSION['logged_in']) {
         header("Location: login.php");
