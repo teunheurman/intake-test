@@ -32,10 +32,10 @@
                     <a class="nav-link" data-toggle="tab" href="#klussen">Klussen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="nieuw.php?type=klant">Nieuwe klant</a>
+                    <a class="nav-link" href="klant.php?type=klant">Nieuwe klant</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="nieuw.php?type=task">Nieuwe klus</a>
+                    <a class="nav-link" href="klus.php">Nieuwe klus</a>
                 </li>
             </ul>
             <ul class="nav nav-tabs ml-auto">

@@ -77,7 +77,7 @@ $jobs = $db->getAllRows('SELECT task.*, customer.*, car.*
                     $owner = $car->getCustomerOfCar();
                     ?>
                     <tr>
-                        <td><?= $owner['first_name'] . ' ' . $owner['last_name'] ?></td>
+                        <td><?= $owner->getFirstName() . ' ' . $owner->getLastName() ?></td>
                         <td><?= $car->getBrand() ?></td>
                         <td><?= $car->getType() ?></td>
                         <td><?= $car->getNumberOfTasksOfCar() ?></td>

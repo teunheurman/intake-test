@@ -9,6 +9,33 @@ $type = $_GET['type'];
 // TODO: Maak het mogelijk om autos, klanten en klussen te verwijderen
 
 
+
+
+// define variables and set to empty values
+$first_nameErr = $emailErr = $genderErr = $websiteErr = "";
+$first_name = $email = $gender = $comment = $website = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (empty($_POST["first_name"])) {
+    $first_nameErr = "Voornaam is verplicht";
+  } else {
+    $first_name = test_input($_POST["first_name"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z ]*$/",$first_name)) {
+      $first_nameErr = "Er mogen alleen letters worden gebruikt";
+    }
+  }
+}
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+
+
 ?>
 
 
@@ -20,8 +47,9 @@ $type = $_GET['type'];
         switch ($type){
         case 'klant':
             ?>
-            <h3>Persoon</h3>                 
-            <input name="first_name" placeholder="Voornaam"></<input>
+            <h3>Persoon</h3>  
+            <span class="error">* <?php echo $first_nameErr;?></span>               
+            <input name="first_name" placeholder="Voornaam" require></<input>
             <input name="last_name" placeholder="Achternaam"></<input>
             <input name="leeftijd" placeholder="Leeftijd"></<input>
 

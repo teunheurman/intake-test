@@ -13,6 +13,16 @@ body{
     margin-bottom: 70px;
 }
 
+.error{
+    color: red;
+    line-height: 0;
+}
+
+.error-text{
+    color: red;
+    line-height: 1;
+}
+
 /* SOURCE: https://codepen.io/colorlib/pen/rxddKy */
 .login-page {
     width: 360px;

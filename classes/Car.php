@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 include_once(__DIR__.'/../services/Database.php');
 
+//het importeren van de Customer classe
+include "Customer.php";
 
 /**
  * Class Car
@@ -145,23 +147,19 @@ class Car
     }
 
     //TODO: Return an instance of classes/Customer instead of array/null
+    //DONE: omdit op te lossen heb ik een nieuwe klasse Customer toegevoegd aan dit project
 
     /**
      * Returns the owner of the car
-     * @return array/null
+     * @return Customer
      */
-    public function getCustomerOfCar()
-    {
-
-        $query = 'SELECT * FROM customer WHERE id = :id';
-        $parameters = array();
-        $parameters['id'] = $this->getCustomerId();
-        $customer = $this->db->getAllRowsSafe($query, $parameters);
-        if (count($customer) > 0) {
-            return $customer[0];
-        }
-        return null;
+    public function getCustomerOfCar() : Customer
+    {  
+        // Aangezien ik al een klasse Customer heb aangemaakt kan ik deze 
+        // hier net zogoed gebruiken om de customer van deze auto op te halen
+        return new Customer($this->getCustomerId());
     }
+
 
     /**
      * Returns the number of tasks associated with this car
@@ -169,11 +167,36 @@ class Car
      */
     public function getNumberOfTasksOfCar() : int
     {
-        $query = "SELECT COUNT(*) as 'nr_of_tasks' FROM task WHERE car_id = :car_id";
-        $parameters = array();
-        $parameters['car_id'] = $this->getId();
-        $countedTasks = $this->db->getAllRowsSafe($query, $parameters);
+        //SQL heeft zijn eigen count methode dit scheeld weer een beetje data over de lijn :D
+        $countedTasks = $this->db->getAllRows(sprintf("SELECT COUNT(*) as 'nr_of_tasks' FROM task WHERE car_id = %d", $this->getId()));
         return (int)($countedTasks[0]['nr_of_tasks']);
+    }
+
+
+
+    // TODO: Maak het mogelijk om een auto aan een bestaande klant toe te voegen
+    // Ik heb dit opgelost om in mijn classe Car een functie addCar toe te voegen 
+    // ik vind het personelijke netter om alle 
+    /**
+     * this funtion will add a new car to the database.
+     */
+    public function addCar($customer_id, $brand, $type){       
+        try {
+            $query = "INSERT INTO `car`(`customer_id`, `brand`, `type`)  VALUES (:customer_id, :brand, :type)";
+            $parameters = array();
+            $parameters['customer_id'] = $customer_id;
+            $parameters['brand'] = $brand;
+            $parameters['type'] = $type;
+            $this->db->execQuerySafe($query, $parameters);
+
+            //Hier wordt niks gedaan met een parameter, daarom wordt de getAllRows gebruikt in plaats van de getAllRowsSafe
+            //nadat we een nieuwe car hebben toegevoegd moeten we alleen nog even het object setten.
+            $maxId = (int)$this->db->getAllRows('SELECT max(ID) as id From car')[0]['id'];
+            $this->loadCar($maxId);
+
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }    
     }
 
 }
