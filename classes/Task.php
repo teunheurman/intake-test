@@ -137,7 +137,7 @@ class Task
 
         if (count($task) == 1) {
             $this->setId($task[0]['id']);
-            $this->setCarId($task[0]['customer_id']);
+            $this->setCarId($task[0]['car_id']);
             $this->setTask($task[0]['task']);
             $this->setStatus($task[0]['status']);
         }
