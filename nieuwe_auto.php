@@ -1,10 +1,13 @@
 <?php
 
 // TODO: Splits deze file op naar meerdere losse scripts. Eentje voor customer, eentje voor auto, eentje voor klussen.
+// DONE: Er is nu bestand niewue_auto.php, klus.php en klant.php.
 
 // TODO: Maak het mogelijk om een auto aan een bestaande klant toe te voegen
+// DONE: dit is nu mogelijk in nieuwe_auto.php 
 
 // TODO: Maak het mogelijk om autos, klanten en klussen te verwijderen
+// DONE: dit is gedaan in overview_klus.php, overview_klant.php en overview_auto.php, alleen er gaat nog wel iets mis bij het verwijderen van een klus :(
 
 require(__DIR__.'/services/Database.php');
 $db = new Database;  

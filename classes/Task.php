@@ -161,4 +161,11 @@ class Task
             $e->getMessage();
         }        
     }
+
+    public function deleteTask(){
+        $query = "DELETE FROM task WHERE id = :id";
+        $parameters = array();
+        $parameters['id'] = $this->id;
+        $this->db->execQuerySafe($query, $parameters);
+    }
 }

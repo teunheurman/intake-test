@@ -1,14 +1,23 @@
 <?php
 
-//TODO: Format according to PSR-2
 
-//TODO: Get all customers
+
+//TODO: Format according to PSR-2
 
 //TODO: Validate if this data is correct
 
 
 require_once(__DIR__.'/services/Database.php');
 require(__DIR__.'/classes/Car.php');
+
+//aangezien html forms geen delete of put meer ondersteunen heb ik er voor gekozen om een post tegebruiken
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!empty($_POST["carId"])) {
+      $carId =$_POST["carId"];
+      $car = new Car((int)$carId);
+      $car->deleteCar();
+    } 
+}
 
 $db = new Database;
 
@@ -30,6 +39,7 @@ $cars = $db->getAllRows('SELECT car.id FROM car');
                     <th>Merk</th>
                     <th>Type</th>
                     <th>Klussen</th>
+                    <th>verwijderen</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,6 +54,14 @@ $cars = $db->getAllRows('SELECT car.id FROM car');
                         <td><?= $car->getBrand() ?></td>
                         <td><?= $car->getType() ?></td>
                         <td><?= $car->getNumberOfTasksOfCar() ?></td>
+                        <td>
+                            <form method="POST" action="overview_autos.php">
+                                <input type="hidden" value="<?= $car->getId()?>" name="carId">
+                                <input class="button" type="submit" value="X"/>
+                            </form>
+                        </td>
+
+
                     </tr>
                 <?php endforeach ?>
                 </tbody>

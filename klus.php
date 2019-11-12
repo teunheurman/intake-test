@@ -1,10 +1,13 @@
 <?php
 
 // TODO: Splits deze file op naar meerdere losse scripts. Eentje voor customer, eentje voor auto, eentje voor klussen.
+// DONE: Er is nu bestand niewue_auto.php, klus.php en klant.php.
 
 // TODO: Maak het mogelijk om een auto aan een bestaande klant toe te voegen
+// DONE: dit is nu mogelijk in nieuwe_auto.php 
 
 // TODO: Maak het mogelijk om autos, klanten en klussen te verwijderen
+// DONE: dit is gedaan in klus.php, klant.php en auto.php, alleen er gaat nog wel iets mis bij het verwijderen van een klus :(
 
 require(__DIR__.'/services/Database.php');
 $db = new Database;  
@@ -54,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require(__DIR__.'/classes/Task.php');
     $new_task = new Task();
     $new_task->addTask($carId, $task);
-    // header('Location: overview.php');
+    header('Location: overview_klussen.php');
   }
 }
 

@@ -164,4 +164,11 @@ class Customer
             echo $e->getMessage();
         }        
     }
+
+    public function deleteCustomer(){
+        $query = "DELETE FROM customer WHERE id = :id";
+        $parameters = array();
+        $parameters['id'] = $this->id;
+        $this->db->execQuerySafe($query, $parameters);
+    }
 }

@@ -199,4 +199,11 @@ class Car
         }    
     }
 
+    public function deleteCar(){
+        $query = "DELETE FROM car WHERE id = :id";
+        $parameters = array();
+        $parameters['id'] = $this->id;
+        $this->db->execQuerySafe($query, $parameters);
+    }
+
 }

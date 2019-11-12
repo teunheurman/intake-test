@@ -22,7 +22,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 
     if (count($users) > 0) {
         $_SESSION['logged_in'] = true;
-        header("Location: overview.php");
+        header("Location: overview_kklanten.php");
         die;
     }
 }
