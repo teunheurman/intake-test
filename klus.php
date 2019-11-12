@@ -30,7 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  if(empty($_POST["car"])){
+  if (empty($_POST["car"])) {
+    $carErr = "auto is verplicht";
+    $valid = false;
+  }
+  else{
     $found = false;
     $carId = $_POST["car"];
     //controlleer als het car is bestaat
@@ -50,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require(__DIR__.'/classes/Task.php');
     $new_task = new Task();
     $new_task->addTask($carId, $task);
-    header('Location: overview.php');
+    // header('Location: overview.php');
   }
 }
 

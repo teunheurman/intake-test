@@ -23,19 +23,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav nav-tabs">
                 <li class="nav-item active">
-                    <a class="nav-link" data-toggle="tab" href="#klanten">Klanten</a>
+                    <a class="nav-link" href="overview_klanten.php">Klanten</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#autos">Autos</a>
+                    <a class="nav-link" href="overview_autos.php">Autos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#klussen">Klussen</a>
+                    <a class="nav-link" href="overview_klussen.php">Klussen</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="klant.php?type=klant">Nieuwe klant</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="klus.php">Nieuwe klus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="nieuwe_auto.php">Auto toevoegen aan klant</a>
                 </li>
             </ul>
             <ul class="nav nav-tabs ml-auto">
